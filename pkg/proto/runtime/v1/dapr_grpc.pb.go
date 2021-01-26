@@ -32,6 +32,8 @@ type DaprClient interface {
 	DeleteState(ctx context.Context, in *DeleteStateRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Watch the state for a specific key.
 	WatchState(ctx context.Context, in *GetStateRequest, opts ...grpc.CallOption) (Dapr_WatchStateClient, error)
+	// Deletes a bulk of state items for a list of keys
+	DeleteBulkState(ctx context.Context, in *DeleteBulkStateRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Executes transactions for a specified store
 	ExecuteStateTransaction(ctx context.Context, in *ExecuteStateTransactionRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Publishes events to the specific topic.
@@ -147,6 +149,15 @@ func (x *daprWatchStateClient) Recv() (*GetStateResponse, error) {
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *daprClient) DeleteBulkState(ctx context.Context, in *DeleteBulkStateRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/dapr.proto.runtime.v1.Dapr/DeleteBulkState", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *daprClient) ExecuteStateTransaction(ctx context.Context, in *ExecuteStateTransactionRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
@@ -322,6 +333,8 @@ type DaprServer interface {
 	DeleteState(context.Context, *DeleteStateRequest) (*empty.Empty, error)
 	// Watch the state for a specific key.
 	WatchState(*GetStateRequest, Dapr_WatchStateServer) error
+	// Deletes a bulk of state items for a list of keys
+	DeleteBulkState(context.Context, *DeleteBulkStateRequest) (*empty.Empty, error)
 	// Executes transactions for a specified store
 	ExecuteStateTransaction(context.Context, *ExecuteStateTransactionRequest) (*empty.Empty, error)
 	// Publishes events to the specific topic.
@@ -375,6 +388,9 @@ func (UnimplementedDaprServer) DeleteState(context.Context, *DeleteStateRequest)
 }
 func (UnimplementedDaprServer) WatchState(*GetStateRequest, Dapr_WatchStateServer) error {
 	return status.Errorf(codes.Unimplemented, "method WatchState not implemented")
+}
+func (UnimplementedDaprServer) DeleteBulkState(context.Context, *DeleteBulkStateRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteBulkState not implemented")
 }
 func (UnimplementedDaprServer) ExecuteStateTransaction(context.Context, *ExecuteStateTransactionRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecuteStateTransaction not implemented")
@@ -542,6 +558,24 @@ type daprWatchStateServer struct {
 
 func (x *daprWatchStateServer) Send(m *GetStateResponse) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _Dapr_DeleteBulkState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBulkStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DaprServer).DeleteBulkState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/dapr.proto.runtime.v1.Dapr/DeleteBulkState",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DaprServer).DeleteBulkState(ctx, req.(*DeleteBulkStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Dapr_ExecuteStateTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -848,6 +882,10 @@ var Dapr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteState",
 			Handler:    _Dapr_DeleteState_Handler,
+		},
+		{
+			MethodName: "DeleteBulkState",
+			Handler:    _Dapr_DeleteBulkState_Handler,
 		},
 		{
 			MethodName: "ExecuteStateTransaction",

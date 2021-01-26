@@ -7,7 +7,7 @@ require (
 	contrib.go.opencensus.io/exporter/zipkin v0.1.1
 	github.com/AdhityaRamadhanus/fasthttpcors v0.0.0-20170121111917-d4c07198763a
 	github.com/ajg/form v1.5.1 // indirect
-	github.com/dapr/components-contrib v1.0.0-rc2.0.20210120162831-5018196c58a0
+	github.com/dapr/components-contrib v1.0.0-rc2.0.20210125194103-11454d7ccf8b
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
 	github.com/fasthttp/router v1.3.5
 	github.com/fatih/structs v1.1.0 // indirect
