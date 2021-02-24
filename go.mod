@@ -1,13 +1,15 @@
 module github.com/dapr/dapr
 
-go 1.15
+go 1.16
 
 require (
 	contrib.go.opencensus.io/exporter/prometheus v0.2.0
 	contrib.go.opencensus.io/exporter/zipkin v0.1.1
 	github.com/AdhityaRamadhanus/fasthttpcors v0.0.0-20170121111917-d4c07198763a
+	github.com/PuerkitoBio/purell v1.1.1
 	github.com/ajg/form v1.5.1 // indirect
-	github.com/dapr/components-contrib v1.0.0-rc2.0.20210125194103-11454d7ccf8b
+	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
+	github.com/dapr/components-contrib v1.0.0-rc6
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
 	github.com/fasthttp/router v1.3.5
 	github.com/fatih/structs v1.1.0 // indirect
@@ -16,7 +18,7 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/golang/protobuf v1.4.3
 	github.com/google/go-cmp v0.5.2
-	github.com/google/uuid v1.1.2
+	github.com/google/uuid v1.2.0
 	github.com/gorilla/mux v1.7.3
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.2
 	github.com/hashicorp/go-hclog v0.14.1
@@ -52,8 +54,10 @@ require (
 	go.opentelemetry.io/otel v0.13.0
 	go.uber.org/atomic v1.6.0
 	goji.io v2.0.2+incompatible // indirect
-	google.golang.org/genproto v0.0.0-20201110150050-8816d57aaa9a
-	google.golang.org/grpc v1.33.1
+	golang.org/x/net v0.0.0-20201202161906-c7110b5ffcbb // indirect
+	golang.org/x/sys v0.0.0-20201202213521-69691e467435 // indirect
+	google.golang.org/genproto v0.0.0-20201204160425-06b3db808446
+	google.golang.org/grpc v1.34.0
 	google.golang.org/protobuf v1.25.0
 	gopkg.in/couchbase/gocbcore.v7 v7.1.18 // indirect
 	gopkg.in/couchbaselabs/gocbconnstr.v1 v1.0.0-00010101000000-000000000000 // indirect
@@ -75,7 +79,7 @@ require (
 )
 
 replace (
-	github.com/dapr/components-contrib => github.com/cvictory/components-contrib v1.0.0-rc1.0.20210123152918-59867597509e
+	github.com/dapr/components-contrib => github.com/cvictory/components-contrib v1.0.0-rc1.0.20210224020155-5b2c63682128
 	gopkg.in/couchbaselabs/gocbconnstr.v1 => github.com/couchbaselabs/gocbconnstr v1.0.5
 	k8s.io/client => github.com/kubernetes-client/go v0.0.0-20190928040339-c757968c4c36
 )

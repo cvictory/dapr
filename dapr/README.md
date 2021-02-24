@@ -9,9 +9,9 @@
 | placement | Dapr Placement service                                                 |
 | sentry    | Dapr Sentry for CA service                                             |
 
-## Proto client generation
+## Proto client generationhttps://github.com/protocolbuffers/protobuf/releases/tag/v3.14.0
 
-1. Install protoc version: [v3.14.0](https://github.com/protocolbuffers/protobuf/releases/tag/v3.14.0)
+1. Install protoc version: [v3.14.0]()
 
 2. Install protoc-gen-go and protoc-gen-go-grpc
 

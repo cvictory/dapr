@@ -1,7 +1,7 @@
 // +build e2e
 
 // ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation and Dapr Contributors.
 // Licensed under the MIT License.
 // ------------------------------------------------------------
 
@@ -337,7 +337,7 @@ var pubsubTests = []struct {
 }
 
 func TestPubSubHTTP(t *testing.T) {
-	log.Println("Enter TestPubSubHTTP")
+	t.Log("Enter TestPubSub")
 	publisherExternalURL := tr.Platform.AcquireAppExternalURL(publisherAppName)
 	require.NotEmpty(t, publisherExternalURL, "publisherExternalURL must not be empty!")
 

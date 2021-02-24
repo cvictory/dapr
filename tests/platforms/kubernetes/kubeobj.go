@@ -1,5 +1,5 @@
 // ------------------------------------------------------------
-// Copyright (c) Microsoft Corporation.
+// Copyright (c) Microsoft Corporation and Dapr Contributors.
 // Licensed under the MIT License.
 // ------------------------------------------------------------
 
@@ -74,9 +74,6 @@ func buildDeploymentObject(namespace string, appDesc AppDescription) *appsv1.Dep
 	}
 	if appDesc.AppProtocol != "" {
 		annotationObject["dapr.io/app-protocol"] = appDesc.AppProtocol
-	}
-	if appDesc.AppHost != "" {
-		annotationObject["dapr.io/app-host"] = appDesc.AppHost
 	}
 	if appDesc.MetricsPort != "" {
 		annotationObject["dapr.io/metrics-port"] = appDesc.MetricsPort
